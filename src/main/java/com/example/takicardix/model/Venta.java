@@ -1,5 +1,7 @@
 package com.example.takicardix.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ public class Venta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer venta_id;
 
     @Column(name = "montoVenta", nullable = false)
     private Double monto;
@@ -29,6 +31,12 @@ public class Venta {
 
     @Column(name = "detalleVenta", length = 200, nullable = false)
     private String detalle;
+
+    @Column(name="fecha_venta", nullable=false)
+    private Date fecha_venta;
+
+    @Column(name="Hora_venta", nullable=false)
+    private Date hora_venta;
 
     
 

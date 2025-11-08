@@ -39,7 +39,7 @@ public class Usuario {
     private String contrasena;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_rol")
+    @JoinColumn(name = "rol")
     private Rol rol;
 
     @OneToMany(mappedBy = "usuario")
