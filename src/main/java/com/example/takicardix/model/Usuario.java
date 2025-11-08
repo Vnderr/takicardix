@@ -1,5 +1,7 @@
 package com.example.takicardix.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "productos")
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
@@ -38,4 +41,7 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "codigo_rol")
     private Rol rol;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Venta> ventas;
 }
