@@ -17,7 +17,7 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
-    public List<Producto> list() {
+    public List<Producto> findAll() {
         return productoRepository.findAll();
     }
 
@@ -46,6 +46,18 @@ public class ProductoService {
             if (producto.getPrecio() != 0) {
                 existingProducto.setPrecio(producto.getPrecio());
             }
+            return productoRepository.save(existingProducto);
+        } else {
+            return null;
+        }
+    }
+
+    public Producto update(Producto producto) {
+        Producto existingProducto = productoRepository.findById(producto.getProducto_id()).orElse(null);
+        if (existingProducto != null) {
+            existingProducto.setNombre(producto.getNombre());
+            existingProducto.setDescripcion(producto.getDescripcion());
+            existingProducto.setPrecio(producto.getPrecio());
             return productoRepository.save(existingProducto);
         } else {
             return null;

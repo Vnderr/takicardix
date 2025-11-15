@@ -33,4 +33,22 @@ public class DireccionService {
         direccionRepository.deleteById(id);
     }
 
+    public Direccion partialUpdate(Direccion direccion) {
+        Direccion existingDireccion = direccionRepository.findById(direccion.getId()).orElse(null);
+        if (existingDireccion != null) {
+            if (direccion.getCalle() != null) {
+                existingDireccion.setCalle(direccion.getCalle());
+            }
+            if (direccion.getNumero() != null) {
+                existingDireccion.setNumero(direccion.getNumero());
+            }
+            if (direccion.getComuna() != null) {
+                existingDireccion.setComuna(direccion.getComuna());
+            }
+            return direccionRepository.save(existingDireccion);
+        } else {
+            return null;
+        }
+    }
+
 }

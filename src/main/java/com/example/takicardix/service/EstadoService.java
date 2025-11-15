@@ -33,4 +33,26 @@ public class EstadoService {
         estadoRepository.deleteById(id);
     }
 
+    public Estado partialUpdate(Estado estado) {
+        Estado existingEstado = estadoRepository.findById(estado.getId()).orElse(null);
+        if (existingEstado != null) {
+            if (estado.getNombre() != null) {
+                existingEstado.setNombre(estado.getNombre());
+            }
+            return estadoRepository.save(existingEstado);
+        } else {
+            return null;
+        }
+    }
+
+    public Estado update(Estado estado) {
+        Estado existingEstado = estadoRepository.findById(estado.getId()).orElse(null);
+        if (existingEstado != null) {
+            existingEstado.setNombre(estado.getNombre());
+            return estadoRepository.save(existingEstado);
+        } else {
+            return null;
+        }
+    }
+
 }

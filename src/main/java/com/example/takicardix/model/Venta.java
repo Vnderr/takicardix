@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +39,25 @@ public class Venta {
 
     @Column(name="Hora_venta", nullable=false)
     private Date hora_venta;
+
+    @Column(name="total", nullable=false)
+    private Integer total;
+
+        @ManyToOne
+    @JoinColumn(name = "id")
+    private MetodoPago metodoPago;
+
+    @ManyToOne
+    @JoinColumn(name = "metodoEnvio_id")
+    private MetodoEnvio metodoEnvio;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Estado estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private ProductoVenta productoVenta;
 
     
 

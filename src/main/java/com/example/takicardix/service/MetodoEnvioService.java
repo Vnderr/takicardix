@@ -33,4 +33,31 @@ public class MetodoEnvioService {
         metodoEnvioRepository.deleteById(id);
     }
 
+    public MetodoEnvio partialUpdate(MetodoEnvio metodoEnvio) {
+        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(metodoEnvio.getId()).orElse(null);
+        if (existingMetodoEnvio != null) {
+            if (metodoEnvio.getNombre() != null) {
+                existingMetodoEnvio.setNombre(metodoEnvio.getNombre());
+            }
+            if (metodoEnvio.getCosto() != null) {
+                existingMetodoEnvio.setCosto(metodoEnvio.getCosto());
+            }
+            return metodoEnvioRepository.save(existingMetodoEnvio);
+        } else {
+            return null;
+        }
+    }
+
+    public MetodoEnvio update(MetodoEnvio metodoEnvio) {
+        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(metodoEnvio.getId()).orElse(null);
+        if (existingMetodoEnvio != null) {
+            existingMetodoEnvio.setNombre(metodoEnvio.getNombre());
+            existingMetodoEnvio.setCosto(metodoEnvio.getCosto());
+            return metodoEnvioRepository.save(existingMetodoEnvio);
+        } else {
+            return null;
+        }
+    }
+
+
 }

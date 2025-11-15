@@ -9,5 +9,5 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     Producto findByNombre(String nombre);
 
-    //Producto findByPrecio(int precio); 
+    Producto findByPrecio(int precio); 
 }

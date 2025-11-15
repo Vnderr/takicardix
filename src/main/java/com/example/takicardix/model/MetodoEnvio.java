@@ -23,4 +23,7 @@ public class MetodoEnvio {
 
     @Column(name = "nombre", length = 20, nullable = false)
     private String nombre;
+
+    @Column(name = "costo", nullable = false)
+    private Integer costo;
 }

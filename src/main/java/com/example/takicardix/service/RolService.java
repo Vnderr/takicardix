@@ -33,4 +33,26 @@ public class RolService {
         rolRepository.deleteById(id);
     }
 
+    public Rol partialUpdate(Rol rol) {
+        Rol existingRol = rolRepository.findById(rol.getId()).orElse(null);
+        if (existingRol != null) {
+            if (rol.getNombre() != null) {
+                existingRol.setNombre(rol.getNombre());
+            }
+            return rolRepository.save(existingRol);
+        } else {
+            return null;
+        }
+    }
+
+    public Rol update(Rol rol) {
+        Rol existingRol = rolRepository.findById(rol.getId()).orElse(null);
+        if (existingRol != null) {
+            existingRol.setNombre(rol.getNombre());
+            return rolRepository.save(existingRol);
+        } else {
+            return null;
+        }
+    }
+
 }
