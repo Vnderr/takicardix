@@ -28,9 +28,6 @@ public class Venta {
     @Column(name = "montoVenta", nullable = false)
     private Double monto;
 
-    @Column(name = "fechaVenta", length = 50, nullable = false)
-    private String fecha;
-
     @Column(name = "detalleVenta", length = 200, nullable = false)
     private String detalle;
 
