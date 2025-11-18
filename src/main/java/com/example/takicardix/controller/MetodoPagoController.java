@@ -44,14 +44,14 @@ public class MetodoPagoController {
 
     @PostMapping
     public ResponseEntity<MetodoPago> createMetodoPago(@RequestBody MetodoPago metodoPago) {
-        metodoPago.setId(null); 
+        metodoPago.setMetodo_pago_id(null); 
         MetodoPago metodoPagoNew = metodoPagoService.save(metodoPago);
         return ResponseEntity.status(201).body(metodoPagoNew);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MetodoPago> updateMetodoPago(@PathVariable Integer id, @RequestBody MetodoPago metodoPago) {
-        metodoPago.setId(id);
+        metodoPago.setMetodo_pago_id(id);
         MetodoPago updateMetodoPago = metodoPagoService.save(metodoPago);
         if (updateMetodoPago == null) {
             return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class MetodoPagoController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<MetodoPago> updateParcialMetodoPago(@PathVariable Integer id, @RequestBody MetodoPago metodoPago) {
-        metodoPago.setId(id);
+        metodoPago.setMetodo_pago_id(id);
         MetodoPago updateMetodoPago = metodoPagoService.partialUpdate(metodoPago);
         if (updateMetodoPago == null) {
             return ResponseEntity.notFound().build();

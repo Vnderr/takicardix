@@ -21,7 +21,7 @@ public class Comuna {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer comuna_id;
 
     @Column(name = "nombre", length = 30, nullable = false)
     private String nombre;

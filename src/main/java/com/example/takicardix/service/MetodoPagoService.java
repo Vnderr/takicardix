@@ -34,7 +34,7 @@ public class MetodoPagoService {
     }
 
     public MetodoPago partialUpdate(MetodoPago metodoPago) {
-        MetodoPago existingMetodoPago = metodoPagoRepository.findById(metodoPago.getId()).orElse(null);
+        MetodoPago existingMetodoPago = metodoPagoRepository.findById(metodoPago.getMetodo_pago_id()).orElse(null);
         if (existingMetodoPago != null) {
             if (metodoPago.getNombre() != null) {
                 existingMetodoPago.setNombre(metodoPago.getNombre());
@@ -46,7 +46,7 @@ public class MetodoPagoService {
     }
 
     public MetodoPago update(MetodoPago metodoPago) {
-        MetodoPago existingMetodoPago = metodoPagoRepository.findById(metodoPago.getId()).orElse(null);
+        MetodoPago existingMetodoPago = metodoPagoRepository.findById(metodoPago.getMetodo_pago_id()).orElse(null);
         if (existingMetodoPago != null) {
             existingMetodoPago.setNombre(metodoPago.getNombre());
             return metodoPagoRepository.save(existingMetodoPago);

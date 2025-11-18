@@ -44,14 +44,14 @@ public class DireccionController {
 
     @PostMapping
     public ResponseEntity<Direccion> createDireccion(@RequestBody Direccion direccion) {
-        direccion.setId(null);
+        direccion.setDireccion_id(null);
         Direccion direccionNew = direccionService.save(direccion);
         return ResponseEntity.status(201).body(direccionNew);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Direccion> updateDireccion(@PathVariable Integer id, @RequestBody Direccion direccion) {
-        direccion.setId(id);
+        direccion.setDireccion_id(id);
         Direccion updatedDireccion= direccionService.save(direccion);
         if (updatedDireccion == null) {
             return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class DireccionController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Direccion> updateParcialDireccion(@PathVariable Integer id, @RequestBody Direccion direccion) {
-        direccion.setId(id);
+        direccion.setDireccion_id(id);
         Direccion updatedDireccion = direccionService.partialUpdate(direccion);
         if (updatedDireccion == null) {
             return ResponseEntity.notFound().build();

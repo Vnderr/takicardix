@@ -38,23 +38,23 @@ public class Venta {
     private Integer total;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "metodo_pago_id")
     private MetodoPago metodoPago;
 
     @ManyToOne
-    @JoinColumn(name = "metodoEnvio_id")
+    @JoinColumn(name = "metodo_envio_id")
     private MetodoEnvio metodoEnvio;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "estado_id")
     private Estado estado;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "producto_venta_id")
     private ProductoVenta productoVenta;
 
     @ManyToOne
-    @JoinColumn(name = "id") 
+    @JoinColumn(name = "usuario_id") 
     private Usuario usuario;
 
 }

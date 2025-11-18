@@ -34,7 +34,7 @@ public class ComunaService {
     }
 
     public Comuna partialUpdate(Comuna comuna) {
-        Comuna existingComuna = comunaRepository.findById(comuna.getId()).orElse(null);
+        Comuna existingComuna = comunaRepository.findById(comuna.getComuna_id()).orElse(null);
         if (existingComuna != null) {
             if (comuna.getNombre() != null) {
                 existingComuna.setNombre(comuna.getNombre());
@@ -49,7 +49,7 @@ public class ComunaService {
     }
 
     public Comuna update(Comuna comuna) {
-        Comuna existingComuna = comunaRepository.findById(comuna.getId()).orElse(null);
+        Comuna existingComuna = comunaRepository.findById(comuna.getComuna_id()).orElse(null);
         if (existingComuna != null) {
             existingComuna.setNombre(comuna.getNombre());
             existingComuna.setRegion(comuna.getRegion());

@@ -19,7 +19,7 @@ public class Estado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer estado_id;
 
     @Column(name = "nombre", length = 20, nullable = false)
     private String nombre;

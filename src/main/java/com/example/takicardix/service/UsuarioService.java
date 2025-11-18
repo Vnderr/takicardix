@@ -50,7 +50,7 @@ public class UsuarioService {
 
     //Patch
     public Usuario partialUpdate(Usuario usuario){
-        Usuario existingUsuario = usuarioRepository.findById(usuario.getId()).orElse(null);
+        Usuario existingUsuario = usuarioRepository.findById(usuario.getUsuario_id()).orElse(null);
         if (existingUsuario != null) {
             if (usuario.getNombre() != null) {
                 existingUsuario.setNombre(usuario.getNombre());
@@ -73,7 +73,7 @@ public class UsuarioService {
     }
 
     public Usuario update(Usuario usuario) {
-        Usuario existingUsuario = usuarioRepository.findById(usuario.getId()).orElse(null);
+        Usuario existingUsuario = usuarioRepository.findById(usuario.getUsuario_id()).orElse(null);
         if (existingUsuario != null) {
             existingUsuario.setNombre(usuario.getNombre());
             existingUsuario.setCorreo(usuario.getCorreo());

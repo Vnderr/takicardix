@@ -45,14 +45,14 @@ public class ComunaController {
 
     @PostMapping
     public ResponseEntity<Comuna> createComuna(@RequestBody Comuna comuna) {
-        comuna.setId(null);
+        comuna.setComuna_id(null);
         Comuna comunaNew = comunaService.save(comuna);
         return ResponseEntity.status(201).body(comunaNew);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Comuna> updateComuna(@PathVariable Integer id, @RequestBody Comuna comuna) {
-        comuna.setId(id);
+        comuna.setComuna_id(id);
         Comuna updatedComuna= comunaService.save(comuna);
         if (updatedComuna == null) {
             return ResponseEntity.notFound().build();
@@ -62,7 +62,7 @@ public class ComunaController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Comuna> updateParcialcomuna(@PathVariable Integer id, @RequestBody Comuna comuna) {
-        comuna.setId(id);
+        comuna.setComuna_id(id);
         Comuna updatedComuna = comunaService.partialUpdate(comuna);
         if (updatedComuna == null) {
             return ResponseEntity.notFound().build();

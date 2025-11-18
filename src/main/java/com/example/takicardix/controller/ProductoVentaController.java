@@ -44,14 +44,14 @@ public class ProductoVentaController {
 
     @PostMapping
     public ResponseEntity<ProductoVenta> createProductoVenta(@RequestBody ProductoVenta productoVenta) {
-        productoVenta.setId(null);
+        productoVenta.setProducto_venta_id(null);
         ProductoVenta productoVentaNew = productoVentaService.save(productoVenta);
         return ResponseEntity.status(201).body(productoVentaNew);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductoVenta> updateProductoVenta(@PathVariable Integer id, @RequestBody ProductoVenta productoVenta) {
-        productoVenta.setId(id);
+        productoVenta.setProducto_venta_id(id);
         ProductoVenta updateProductoVenta = productoVentaService.save(productoVenta);
         if (updateProductoVenta == null) {
             return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class ProductoVentaController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ProductoVenta> updateParcialProductoVenta(@PathVariable Integer id, @RequestBody ProductoVenta productoVenta) {
-        productoVenta.setId(id);
+        productoVenta.setProducto_venta_id(id);
         ProductoVenta updateProductoVenta = productoVentaService.partialUpdate(productoVenta);
         if (updateProductoVenta == null) {
             return ResponseEntity.notFound().build();

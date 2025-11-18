@@ -34,7 +34,7 @@ public class MetodoEnvioService {
     }
 
     public MetodoEnvio partialUpdate(MetodoEnvio metodoEnvio) {
-        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(metodoEnvio.getId()).orElse(null);
+        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(metodoEnvio.getMetodo_envio_id()).orElse(null);
         if (existingMetodoEnvio != null) {
             if (metodoEnvio.getNombre() != null) {
                 existingMetodoEnvio.setNombre(metodoEnvio.getNombre());
@@ -49,7 +49,7 @@ public class MetodoEnvioService {
     }
 
     public MetodoEnvio update(MetodoEnvio metodoEnvio) {
-        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(metodoEnvio.getId()).orElse(null);
+        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(metodoEnvio.getMetodo_envio_id()).orElse(null);
         if (existingMetodoEnvio != null) {
             existingMetodoEnvio.setNombre(metodoEnvio.getNombre());
             existingMetodoEnvio.setCosto(metodoEnvio.getCosto());

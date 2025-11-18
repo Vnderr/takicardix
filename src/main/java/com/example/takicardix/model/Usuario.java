@@ -26,7 +26,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer usuario_id;
 
     @Column(name = "nombreUsuario", length = 50, nullable = false)
     private String nombre;
@@ -39,7 +39,7 @@ public class Usuario {
     private String contrasena;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "rol_id")
     private Rol rol;
 
     @OneToMany(mappedBy = "usuario")

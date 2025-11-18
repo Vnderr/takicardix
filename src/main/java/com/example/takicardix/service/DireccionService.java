@@ -34,7 +34,7 @@ public class DireccionService {
     }
 
     public Direccion partialUpdate(Direccion direccion) {
-        Direccion existingDireccion = direccionRepository.findById(direccion.getId()).orElse(null);
+        Direccion existingDireccion = direccionRepository.findById(direccion.getDireccion_id()).orElse(null);
         if (existingDireccion != null) {
             if (direccion.getCalle() != null) {
                 existingDireccion.setCalle(direccion.getCalle());
@@ -45,6 +45,18 @@ public class DireccionService {
             if (direccion.getComuna() != null) {
                 existingDireccion.setComuna(direccion.getComuna());
             }
+            return direccionRepository.save(existingDireccion);
+        } else {
+            return null;
+        }
+    }
+
+    public Direccion update(Direccion direccion) {
+        Direccion existingDireccion = direccionRepository.findById(direccion.getDireccion_id()).orElse(null);
+        if (existingDireccion != null) {
+            existingDireccion.setCalle(direccion.getCalle());
+            existingDireccion.setNumero(direccion.getNumero());
+            existingDireccion.setComuna(direccion.getComuna());
             return direccionRepository.save(existingDireccion);
         } else {
             return null;

@@ -44,14 +44,14 @@ public class EstadoController {
 
     @PostMapping
     public ResponseEntity<Estado> createEstado(@RequestBody Estado estado) {
-        estado.setId(null);
+        estado.setEstado_id(null);
         Estado estadoNew = estadoService.save(estado);
         return ResponseEntity.status(201).body(estadoNew);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Estado> updateEstado(@PathVariable Integer id, @RequestBody Estado estado) {
-        estado.setId(id);
+        estado.setEstado_id(id);
         Estado updateEstado= estadoService.save(estado);
         if (updateEstado == null) {
             return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class EstadoController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Estado> updateParcialEstado(@PathVariable Integer id, @RequestBody Estado estado) {
-        estado.setId(id);
+        estado.setEstado_id(id);
         Estado updatedEstado = estadoService.partialUpdate(estado);
         if (updatedEstado == null) {
             return ResponseEntity.notFound().build();

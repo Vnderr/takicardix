@@ -21,7 +21,7 @@ public class Direccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer direccion_id;
 
     @Column(name = "calle", length = 50, nullable = false)
     private String calle;
@@ -33,11 +33,11 @@ public class Direccion {
     private Integer numero;
 
     @ManyToOne
-    @JoinColumn(name = "comuna")
+    @JoinColumn(name = "comuna_id")
     private Comuna comuna;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
 }

@@ -34,10 +34,10 @@ public class ProductoVentaService {
     }
 
     public ProductoVenta partialUpdate(ProductoVenta productoVenta) {
-        ProductoVenta existingProductoVenta = productoVentaRepository.findById(productoVenta.getId()).orElse(null);
+        ProductoVenta existingProductoVenta = productoVentaRepository.findById(productoVenta.getProducto_venta_id()).orElse(null);
         if (existingProductoVenta != null) {
-            if (productoVenta.getId() != null) {
-                existingProductoVenta.setId(productoVenta.getId());
+            if (productoVenta.getProducto_venta_id() != null) {
+                existingProductoVenta.setProducto_venta_id(productoVenta.getProducto_venta_id());
             }
             if (productoVenta.getCantidad() != null) {
                 existingProductoVenta.setCantidad(productoVenta.getCantidad());
@@ -50,9 +50,9 @@ public class ProductoVentaService {
     }
 
     public ProductoVenta update(ProductoVenta productoVenta) {
-        ProductoVenta existingProductoVenta = productoVentaRepository.findById(productoVenta.getId()).orElse(null);
+        ProductoVenta existingProductoVenta = productoVentaRepository.findById(productoVenta.getProducto_venta_id()).orElse(null);
         if (existingProductoVenta != null) {
-            existingProductoVenta.setId(productoVenta.getId());
+            existingProductoVenta.setProducto_venta_id(productoVenta.getProducto_venta_id());
             existingProductoVenta.setCantidad(productoVenta.getCantidad());
             return productoVentaRepository.save(existingProductoVenta);
         } else {

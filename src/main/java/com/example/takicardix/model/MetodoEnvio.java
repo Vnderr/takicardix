@@ -19,7 +19,7 @@ public class MetodoEnvio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer metodo_envio_id;
 
     @Column(name = "nombre", length = 20, nullable = false)
     private String nombre;

@@ -57,14 +57,14 @@ public class UsuarioController {
     
     @PostMapping()
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
-        usuario.setId(null);
+        usuario.setUsuario_id(null);
         Usuario newUsuario = usuarioService.save(usuario);
         return ResponseEntity.status(201).body(newUsuario);
     }
 
     @PostMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id,@RequestBody Usuario usuario) {
-        usuario.setId(id);
+        usuario.setUsuario_id(id);
         Usuario updatedUsuario = usuarioService.save(usuario);
 
         if (updatedUsuario == null) {
@@ -75,7 +75,7 @@ public class UsuarioController {
 
     @PostMapping("/{id}")
     public ResponseEntity<Usuario> updateParcialUsuario(@PathVariable Integer id,@RequestBody Usuario usuario) {
-        usuario.setId(id);
+        usuario.setUsuario_id(id);
         Usuario updatedUsuario = usuarioService.partialUpdate(usuario);
 
         if (updatedUsuario == null) {

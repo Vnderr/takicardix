@@ -44,14 +44,14 @@ public class RolController {
 
     @PostMapping
     public ResponseEntity<Rol> createRol(@RequestBody Rol rol) {
-        rol.setId(null);
+        rol.setRol_id(null);
         Rol rolNew = rolService.save(rol);
         return ResponseEntity.status(201).body(rolNew);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Rol> updateRol(@PathVariable Integer id, @RequestBody Rol rol) {
-        rol.setId(id);
+        rol.setRol_id(id);
         Rol updateRol = rolService.save(rol);
         if (updateRol == null) {
             return ResponseEntity.notFound().build();
@@ -61,7 +61,7 @@ public class RolController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Rol> updateParcialRol(@PathVariable Integer id, @RequestBody Rol rol) {
-        rol.setId(id);
+        rol.setRol_id(id);
         Rol updateRol = rolService.partialUpdate(rol);
         if (updateRol == null) {
             return ResponseEntity.notFound().build();
