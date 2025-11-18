@@ -25,7 +25,7 @@ public class RegionController {
     private RegionService regionService;
 
     @GetMapping
-    public ResponseEntity<List<Region>> getAllRegion() {
+    public ResponseEntity<List<Region>> getAllRegiones() {
         List<Region> regiones = regionService.FindAll();
         if (regiones.isEmpty()) {
             return ResponseEntity.noContent().build();

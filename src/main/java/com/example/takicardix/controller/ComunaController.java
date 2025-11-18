@@ -26,7 +26,7 @@ public class ComunaController {
     private ComunaService comunaService;
 
     @GetMapping
-    public ResponseEntity<List<Comuna>> getallProducto() {
+    public ResponseEntity<List<Comuna>> getAllComunas() {
         List<Comuna> comunas = comunaService.FindAll();
         if (comunas.isEmpty()) {
             return ResponseEntity.noContent().build();

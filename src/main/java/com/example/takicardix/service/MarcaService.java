@@ -55,4 +55,8 @@ public class MarcaService {
         }   
     }
 
+    public void deleteByMarcaId(Integer id) {
+        marcaRepository.deleteById(id);
+    }
+
 }

@@ -25,7 +25,7 @@ public class MetodoEnvioController {
     private MetodoEnvioService metodoEnvioService;
 
     @GetMapping
-    public ResponseEntity<List<MetodoEnvio>> getallMetodoEnvio() {
+    public ResponseEntity<List<MetodoEnvio>> getAllMetodosEnvios() {
         List<MetodoEnvio> metodoEnvios = metodoEnvioService.findAll();
         if (metodoEnvios.isEmpty()) {
             return ResponseEntity.noContent().build();

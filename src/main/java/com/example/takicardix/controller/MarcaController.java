@@ -25,7 +25,7 @@ public class MarcaController {
     private MarcaService marcaService;
 
     @GetMapping
-    public ResponseEntity<List<Marca>> getallMarca() {
+    public ResponseEntity<List<Marca>> getallMarcas() {
         List<Marca> marcas = marcaService.findAll();
         if (marcas.isEmpty()) {
             return ResponseEntity.noContent().build();

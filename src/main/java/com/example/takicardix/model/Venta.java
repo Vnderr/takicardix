@@ -37,9 +37,6 @@ public class Venta {
     @Column(name="fecha_venta", nullable=false)
     private Date fecha_venta;
 
-    @Column(name="Hora_venta", nullable=false)
-    private Date hora_venta;
-
     @Column(name="total", nullable=false)
     private Integer total;
 

@@ -25,7 +25,7 @@ public class DireccionController {
     private DireccionService direccionService;
 
     @GetMapping
-    public ResponseEntity<List<Direccion>> getallProducto() {
+    public ResponseEntity<List<Direccion>> getAllDirecciones() {
         List<Direccion> direcciones = direccionService.FindAll();
         if (direcciones.isEmpty()) {
             return ResponseEntity.noContent().build();

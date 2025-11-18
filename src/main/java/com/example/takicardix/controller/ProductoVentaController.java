@@ -25,7 +25,7 @@ public class ProductoVentaController {
     private ProductoVentaService productoVentaService;
 
     @GetMapping
-    public ResponseEntity<List<ProductoVenta>> getAllProductoVenta() {
+    public ResponseEntity<List<ProductoVenta>> getAllProductosVentas() {
         List<ProductoVenta> productoVentas = productoVentaService.findAll();
         if (productoVentas.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -44,7 +44,7 @@ public class ProductoVentaController {
 
     @PostMapping
     public ResponseEntity<ProductoVenta> createProductoVenta(@RequestBody ProductoVenta productoVenta) {
-        productoVenta.setId(null); // aseguramos que se cree uno nuevo
+        productoVenta.setId(null);
         ProductoVenta productoVentaNew = productoVentaService.save(productoVenta);
         return ResponseEntity.status(201).body(productoVentaNew);
     }

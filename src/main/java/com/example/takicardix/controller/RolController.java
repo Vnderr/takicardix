@@ -25,7 +25,7 @@ public class RolController {
     private RolService rolService;
 
     @GetMapping
-    public ResponseEntity<List<Rol>> getAllRol() {
+    public ResponseEntity<List<Rol>> getAllRoles() {
         List<Rol> roles = rolService.findAll();
         if (roles.isEmpty()) {
             return ResponseEntity.noContent().build();

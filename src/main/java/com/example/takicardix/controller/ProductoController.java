@@ -26,7 +26,7 @@ public class ProductoController {
     private ProductoService productoService;
 
     @GetMapping
-    public ResponseEntity<List<Producto>> getallProducto() {
+    public ResponseEntity<List<Producto>> getAllProductos() {
         List<Producto> productos = productoService.findAll();
         if (productos.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -35,7 +35,7 @@ public class ProductoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> getUsuarioById(@PathVariable Integer id) {
+    public ResponseEntity<Producto> getProductoById(@PathVariable Integer id) {
         Producto producto = productoService.findById(id);
         if (producto == null) {
             return ResponseEntity.notFound().build();
@@ -44,7 +44,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ResponseEntity<Producto> createproducto(@RequestBody Producto producto) {
+    public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
         producto.setProducto_id(null);
         Producto productoNew = productoService.save(producto);
         return ResponseEntity.status(201).body(productoNew);
@@ -73,6 +73,12 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProducto(@PathVariable Integer id) {
         productoService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/marca/{marcaId}")
+    public ResponseEntity<Void> deleteProductosByMarca(@PathVariable Integer marcaId) {
+        productoService.deleteByMarcaId(marcaId);
         return ResponseEntity.noContent().build();
     }
 

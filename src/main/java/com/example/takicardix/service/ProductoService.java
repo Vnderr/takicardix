@@ -68,4 +68,14 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
+    public void deleteByMarcaId(Integer marca_id) {
+        List<Producto> productos = productoRepository.findAll();
+        for (Producto producto : productos) {
+            if (producto.getMarca() != null && producto.getMarca().getMarca_id().equals(marca_id)) {
+                productoRepository.deleteById(producto.getProducto_id());
+            }
+        }
+    }
+
+
 }

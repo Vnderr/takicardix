@@ -25,7 +25,7 @@ public class MetodoPagoController {
     private MetodoPagoService metodoPagoService;
 
     @GetMapping
-    public ResponseEntity<List<MetodoPago>> getAllMetodoPago() {
+    public ResponseEntity<List<MetodoPago>> getAllMetodosPagos() {
         List<MetodoPago> metodoPagos = metodoPagoService.findAll();
         if (metodoPagos.isEmpty()) {
             return ResponseEntity.noContent().build();

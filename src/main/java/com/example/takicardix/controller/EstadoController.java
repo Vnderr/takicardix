@@ -25,7 +25,7 @@ public class EstadoController {
     private EstadoService estadoService;
 
     @GetMapping
-    public ResponseEntity<List<Estado>> getallEstado() {
+    public ResponseEntity<List<Estado>> getAllEstados() {
         List<Estado> estados = estadoService.findAll();
         if (estados.isEmpty()) {
             return ResponseEntity.noContent().build();
