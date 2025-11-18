@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table (name = "ventas")
+@Table(name = "ventas")
 public class Venta {
 
     @Id
@@ -31,13 +31,13 @@ public class Venta {
     @Column(name = "detalleVenta", length = 200, nullable = false)
     private String detalle;
 
-    @Column(name="fecha_venta", nullable=false)
+    @Column(name = "fecha_venta", nullable = false)
     private Date fecha_venta;
 
-    @Column(name="total", nullable=false)
+    @Column(name = "total", nullable = false)
     private Integer total;
 
-        @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id")
     private MetodoPago metodoPago;
 
@@ -53,6 +53,8 @@ public class Venta {
     @JoinColumn(name = "id")
     private ProductoVenta productoVenta;
 
-    
+    @ManyToOne
+    @JoinColumn(name = "id") 
+    private Usuario usuario;
 
 }
