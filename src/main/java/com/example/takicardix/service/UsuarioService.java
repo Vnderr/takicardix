@@ -72,4 +72,17 @@ public class UsuarioService {
         return null;
     }
 
+    public Usuario update(Usuario usuario) {
+        Usuario existingUsuario = usuarioRepository.findById(usuario.getId()).orElse(null);
+        if (existingUsuario != null) {
+            existingUsuario.setNombre(usuario.getNombre());
+            existingUsuario.setCorreo(usuario.getCorreo());
+            existingUsuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+            existingUsuario.setRol(usuario.getRol());
+            return usuarioRepository.save(existingUsuario);
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -33,30 +33,36 @@ public class VentaService {
         ventaRepository.deleteById(id);
     }
 
-    public Venta partialUpdate(Venta venta) {
+    public Venta partialUpdate(Venta venta){
         Venta existingVenta = ventaRepository.findById(venta.getVenta_id()).orElse(null);
         if (existingVenta != null) {
-            if (venta.getFecha() != null) {
-                existingVenta.setFecha(venta.getFecha());
+            if (venta.getMonto() != null) {
+                existingVenta.setMonto(venta.getMonto());
+            }
+            if (venta.getDetalle() != null) {
+                existingVenta.setDetalle(venta.getDetalle());
+            }
+            if (venta.getFecha_venta() != null) {
+                existingVenta.setFecha_venta(venta.getFecha_venta());
             }
             if (venta.getTotal() != null) {
                 existingVenta.setTotal(venta.getTotal());
             }
             return ventaRepository.save(existingVenta);
-        } else {
-            return null;
         }
+        return null;
     }
 
     public Venta update(Venta venta) {
         Venta existingVenta = ventaRepository.findById(venta.getVenta_id()).orElse(null);
         if (existingVenta != null) {
-            existingVenta.setFecha(venta.getFecha());
+            existingVenta.setMonto(venta.getMonto());
+            existingVenta.setDetalle(venta.getDetalle());
+            existingVenta.setFecha_venta(venta.getFecha_venta());
             existingVenta.setTotal(venta.getTotal());
             return ventaRepository.save(existingVenta);
-        } else {
-            return null;
         }
-    }
+        return null;
+    } 
 
 }
