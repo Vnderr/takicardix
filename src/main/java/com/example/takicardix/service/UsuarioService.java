@@ -38,18 +38,18 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    //Funcion login
-    public Usuario login (Usuario usuario) {
+    // Funcion login
+    public Usuario login(Usuario usuario) {
         Usuario foundUsuario = usuarioRepository.findByCorreo(usuario.getCorreo());
 
-        if (foundUsuario != null && passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena())){
+        if (foundUsuario != null && passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena())) {
             return foundUsuario;
         }
         return null;
     }
 
-    //Patch
-    public Usuario partialUpdate(Usuario usuario){
+    // Patch
+    public Usuario partialUpdate(Usuario usuario) {
         Usuario existingUsuario = usuarioRepository.findById(usuario.getUsuario_id()).orElse(null);
         if (existingUsuario != null) {
             if (usuario.getNombre() != null) {
@@ -59,11 +59,11 @@ public class UsuarioService {
                 existingUsuario.setCorreo(usuario.getCorreo());
             }
 
-            if(usuario.getContrasena() != null) {
+            if (usuario.getContrasena() != null) {
                 existingUsuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
             }
 
-            if(usuario.getRol() != null) {
+            if (usuario.getRol() != null) {
                 existingUsuario.setRol(usuario.getRol());
             }
 
@@ -83,6 +83,10 @@ public class UsuarioService {
         } else {
             return null;
         }
+    }
+
+    public Usuario findByCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo);
     }
 
 }

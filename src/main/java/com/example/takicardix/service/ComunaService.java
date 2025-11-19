@@ -17,7 +17,7 @@ public class ComunaService {
     @Autowired
     private ComunaRepository comunaRepository;
 
-    public List<Comuna> FindAll(){
+    public List<Comuna> FindAll() {
         return comunaRepository.findAll();
     }
 
@@ -58,4 +58,14 @@ public class ComunaService {
             return null;
         }
     }
+
+    public void deleteByRegionId(Integer region_id) {
+        List<Comuna> comunas = comunaRepository.findAll();
+        for (Comuna comuna : comunas) {
+            if (comuna.getRegion() != null && comuna.getRegion().getRegion_id().equals(region_id)) {
+                comunaRepository.deleteById(comuna.getComuna_id());
+            }
+        }
+    }
+
 }

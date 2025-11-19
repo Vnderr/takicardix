@@ -53,7 +53,7 @@ public class ComunaController {
     @PutMapping("/{id}")
     public ResponseEntity<Comuna> updateComuna(@PathVariable Integer id, @RequestBody Comuna comuna) {
         comuna.setComuna_id(id);
-        Comuna updatedComuna= comunaService.save(comuna);
+        Comuna updatedComuna = comunaService.save(comuna);
         if (updatedComuna == null) {
             return ResponseEntity.notFound().build();
         }
@@ -73,6 +73,12 @@ public class ComunaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteComuna(@PathVariable Integer id) {
         comunaService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/region/{regionId}")
+    public ResponseEntity<Void> deleteRegion(@PathVariable Integer regionId) {
+        comunaService.deleteByRegionId(regionId);
         return ResponseEntity.noContent().build();
     }
 

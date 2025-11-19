@@ -22,13 +22,9 @@ public class ProductoService {
     }
 
     public Producto findById(Integer id) {
-        Producto producto = productoRepository.findById(id).orElse(null);  
-            return producto;
+        Producto producto = productoRepository.findById(id).orElse(null);
+        return producto;
     }
-
-    public Producto findByNombre(String nombre) {
-        return productoRepository.findByNombre(nombre);
-    }   
 
     public Producto save(Producto producto) {
         return productoRepository.save(producto);
@@ -77,5 +73,12 @@ public class ProductoService {
         }
     }
 
+    public Producto findByNombre(String nombre) {
+        return productoRepository.findByNombre(nombre);
+    }
+
+    public Producto findByPrecio(int precio) {
+        return productoRepository.findByPrecio(precio);
+    }
 
 }

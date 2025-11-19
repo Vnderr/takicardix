@@ -21,7 +21,7 @@ import com.example.takicardix.service.DireccionService;
 @RequestMapping("/api/direccion")
 public class DireccionController {
 
-        @Autowired
+    @Autowired
     private DireccionService direccionService;
 
     @GetMapping
@@ -52,7 +52,7 @@ public class DireccionController {
     @PutMapping("/{id}")
     public ResponseEntity<Direccion> updateDireccion(@PathVariable Integer id, @RequestBody Direccion direccion) {
         direccion.setDireccion_id(id);
-        Direccion updatedDireccion= direccionService.save(direccion);
+        Direccion updatedDireccion = direccionService.save(direccion);
         if (updatedDireccion == null) {
             return ResponseEntity.notFound().build();
         }
@@ -60,7 +60,8 @@ public class DireccionController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Direccion> updateParcialDireccion(@PathVariable Integer id, @RequestBody Direccion direccion) {
+    public ResponseEntity<Direccion> updateParcialDireccion(@PathVariable Integer id,
+            @RequestBody Direccion direccion) {
         direccion.setDireccion_id(id);
         Direccion updatedDireccion = direccionService.partialUpdate(direccion);
         if (updatedDireccion == null) {
@@ -72,6 +73,12 @@ public class DireccionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDireccion(@PathVariable Integer id) {
         direccionService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/comuna/{comunaId}")
+    public ResponseEntity<Void> deleteComuna(@PathVariable Integer comunaId) {
+        direccionService.deleteByComunaId(comunaId);
         return ResponseEntity.noContent().build();
     }
 

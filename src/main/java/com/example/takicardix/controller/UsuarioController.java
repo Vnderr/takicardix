@@ -49,13 +49,22 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
         Usuario usuario = usuarioService.findById(id);
-        
+
         if (usuario == null) {
             return ResponseEntity.notFound().build();
-        } 
+        }
         return ResponseEntity.ok(usuario);
     }
-    
+
+    @GetMapping("/correo/{correo}")
+    public ResponseEntity<Usuario> getUsuarioByCorreo(@PathVariable String correo) {
+        Usuario usuario = usuarioService.findByCorreo(correo);
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuario);
+    }
+
     @PostMapping()
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         usuario.setUsuario_id(null);
@@ -64,7 +73,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id,@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
         usuario.setUsuario_id(id);
         Usuario updatedUsuario = usuarioService.save(usuario);
 
@@ -75,7 +84,7 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> updateParcialUsuario(@PathVariable Integer id,@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> updateParcialUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
         usuario.setUsuario_id(id);
         Usuario updatedUsuario = usuarioService.partialUpdate(usuario);
 
@@ -85,12 +94,10 @@ public class UsuarioController {
         return ResponseEntity.ok(updatedUsuario);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
         usuarioService.deleteById(id);
-        return ResponseEntity.noContent().build();  
-    }  
-    
-    
+        return ResponseEntity.noContent().build();
+    }
+
 }

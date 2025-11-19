@@ -63,4 +63,13 @@ public class DireccionService {
         }
     }
 
+    public void deleteByComunaId(Integer comuna_id) {
+        List<Direccion> direcciones = direccionRepository.findAll();
+        for (Direccion direccion : direcciones) {
+            if (direccion.getComuna() != null && direccion.getComuna().getComuna_id().equals(comuna_id)) {
+                direccionRepository.deleteById(direccion.getDireccion_id());
+            }
+        }
+    }
+
 }

@@ -32,8 +32,8 @@ public class Producto {
     @Column(name = "precio", nullable = false)
     private Double precio;
 
-    //@Column(name = "image_url")
-    //private String imageUrl;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @ManyToOne
     @JoinColumn(name = "marca_id")
