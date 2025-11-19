@@ -42,6 +42,10 @@ public class ProductoService {
             if (producto.getPrecio() != 0) {
                 existingProducto.setPrecio(producto.getPrecio());
             }
+            if (producto.getImageUrl() != null) {
+                existingProducto.setImageUrl(producto.getImageUrl());
+                
+            }
             return productoRepository.save(existingProducto);
         } else {
             return null;
@@ -54,6 +58,7 @@ public class ProductoService {
             existingProducto.setNombre(producto.getNombre());
             existingProducto.setDescripcion(producto.getDescripcion());
             existingProducto.setPrecio(producto.getPrecio());
+            existingProducto.setImageUrl(null);
             return productoRepository.save(existingProducto);
         } else {
             return null;
