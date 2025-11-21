@@ -18,7 +18,7 @@ import com.example.takicardix.model.Region;
 import com.example.takicardix.service.RegionService;
 
 @RestController
-@RequestMapping("/api/region")
+@RequestMapping("/api/regiones")
 public class RegionController {
 
     @Autowired

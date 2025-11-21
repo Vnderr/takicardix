@@ -19,7 +19,7 @@ import com.example.takicardix.model.Comuna;
 import com.example.takicardix.service.ComunaService;
 
 @RestController
-@RequestMapping("/api/comuna")
+@RequestMapping("/api/comunas")
 public class ComunaController {
 
     @Autowired

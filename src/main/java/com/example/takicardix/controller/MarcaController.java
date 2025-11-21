@@ -18,7 +18,7 @@ import com.example.takicardix.model.Marca;
 import com.example.takicardix.service.MarcaService;
 
 @RestController
-@RequestMapping("/api/Marca")
+@RequestMapping("/api/marcas")
 public class MarcaController {
 
     @Autowired

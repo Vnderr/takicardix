@@ -18,7 +18,7 @@ import com.example.takicardix.model.Estado;
 import com.example.takicardix.service.EstadoService;
 
 @RestController
-@RequestMapping("/api/Estado")
+@RequestMapping("/api/estados")
 public class EstadoController {
 
     @Autowired

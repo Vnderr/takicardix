@@ -18,7 +18,7 @@ import com.example.takicardix.model.MetodoEnvio;
 import com.example.takicardix.service.MetodoEnvioService;
 
 @RestController
-@RequestMapping("/api/MetodoEnvio")
+@RequestMapping("/api/metodosEnvios")
 public class MetodoEnvioController {
 
     @Autowired

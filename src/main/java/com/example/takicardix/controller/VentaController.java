@@ -18,7 +18,7 @@ import com.example.takicardix.model.Venta;
 import com.example.takicardix.service.VentaService;
 
 @RestController
-@RequestMapping("/api/venta")
+@RequestMapping("/api/ventas")
 public class VentaController {
 
     @Autowired

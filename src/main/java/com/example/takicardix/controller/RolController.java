@@ -18,7 +18,7 @@ import com.example.takicardix.model.Rol;
 import com.example.takicardix.service.RolService;
 
 @RestController
-@RequestMapping("/api/rol")
+@RequestMapping("/api/roles")
 public class RolController {
 
     @Autowired

@@ -18,7 +18,7 @@ import com.example.takicardix.model.Direccion;
 import com.example.takicardix.service.DireccionService;
 
 @RestController
-@RequestMapping("/api/direccion")
+@RequestMapping("/api/direcciones")
 public class DireccionController {
 
     @Autowired
