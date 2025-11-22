@@ -25,9 +25,4 @@ public class Marca {
 
     @Column(name = "nombre", length = 20, nullable = false)
     private String nombre;
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
-    private Producto producto;
-
 }
