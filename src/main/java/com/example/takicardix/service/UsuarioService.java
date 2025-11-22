@@ -31,6 +31,8 @@ public class UsuarioService {
     }
 
     public Usuario save(Usuario usuario) {
+        String passwordHasheada = passwordEncoder.encode(usuario.getContrasena());
+        usuario.setContrasena(passwordHasheada);
         return usuarioRepository.save(usuario);
     }
 
