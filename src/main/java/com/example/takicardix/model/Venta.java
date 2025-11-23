@@ -25,6 +25,9 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer venta_id;
 
+    @Column(name = "telefono")
+    private String telefono;
+
     @Column(name = "montoVenta", nullable = false)
     private Double monto;
 
@@ -53,5 +56,15 @@ public class Venta {
     @JoinColumn(name = "producto_venta_id")
     private ProductoVenta productoVenta;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+    @ManyToOne
+    @JoinColumn(name = "comuna_id")
+    private Comuna comuna;
 
 }
