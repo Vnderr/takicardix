@@ -53,8 +53,5 @@ public class Venta {
     @JoinColumn(name = "producto_venta_id")
     private ProductoVenta productoVenta;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id") 
-    private Usuario usuario;
 
 }
