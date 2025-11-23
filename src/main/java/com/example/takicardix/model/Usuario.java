@@ -43,6 +43,7 @@ public class Usuario {
     private Rol rol;
 
     @OneToMany
+    @JsonIgnore
     @JoinColumn(name = "usuario_id")
     private List<Venta> venta;
 
