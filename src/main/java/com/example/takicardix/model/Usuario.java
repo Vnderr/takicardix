@@ -42,6 +42,8 @@ public class Usuario {
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Venta> ventas;
+    @OneToMany
+    @JoinColumn(name = "usuario_id")
+    private List<Venta> venta;
+
 }
