@@ -65,5 +65,9 @@ public class VentaService {
         return null;
     } 
 
+    public List<Venta> findByUsuarioId(Integer usuarioId) {
+        return ventaRepository.findByUsuarioId(usuarioId);
+    }
+
 
 }
