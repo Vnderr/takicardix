@@ -33,7 +33,7 @@ public class VentaService {
         ventaRepository.deleteById(id);
     }
 
-    public Venta partialUpdate(Venta venta){
+    public Venta partialUpdate(Venta venta) {
         Venta existingVenta = ventaRepository.findById(venta.getVenta_id()).orElse(null);
         if (existingVenta != null) {
             if (venta.getMonto() != null) {
@@ -63,11 +63,10 @@ public class VentaService {
             return ventaRepository.save(existingVenta);
         }
         return null;
-    } 
-
-    public List<Venta> findByUsuarioUsuarioId(Integer usuarioId) {
-        return ventaRepository.findByUsuarioUsuarioId(usuarioId);
     }
 
+    public List<Venta> findByUsuarioUsuario_id(Integer usuarioId) {
+        return ventaRepository.findByUsuarioUsuario_id(usuarioId);
+    }
 
 }
