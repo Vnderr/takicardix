@@ -65,8 +65,8 @@ public class VentaService {
         return null;
     } 
 
-    public List<Venta> findByUsuarioId(Integer usuarioId) {
-        return ventaRepository.findByUsuarioId(usuarioId);
+    public List<Venta> findByUsuariosUsuarioId(Integer usuarioId) {
+        return ventaRepository.findByUsuariosUsuarioId(usuarioId);
     }
 
 

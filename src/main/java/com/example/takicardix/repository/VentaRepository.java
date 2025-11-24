@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface VentaRepository extends JpaRepository<Venta, Integer> {
 
-List<Venta> findByUsuarioId(Integer usuarioId);
+List<Venta> findByUsuariosUsuarioId(Integer usuarioId);
 
 }
