@@ -35,7 +35,7 @@ public class Usuario {
     @Column(name = "correoUsuario", length = 50, nullable = false)
     private String correo;
 
-    @Column(name = "contrasenaUsuario", length = 100, nullable = false)
+    @Column(name = "contrasenaUsuario", length = 255, nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contrasena;
 

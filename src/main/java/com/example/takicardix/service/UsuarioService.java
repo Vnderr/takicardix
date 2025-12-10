@@ -40,17 +40,12 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    // Funcion login
     public Usuario login(Usuario usuario) {
-        Usuario foundUsuario = usuarioRepository.findByCorreo(usuario.getCorreo());
-
-        if (foundUsuario != null && passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena())) {
-            return foundUsuario;
-        }
-        return null;
+        return usuarioRepository.findByCorreo(usuario.getCorreo())
+                .filter(foundUsuario -> passwordEncoder.matches(usuario.getContrasena(), foundUsuario.getContrasena()))
+                .orElse(null);
     }
 
-    // Patch
     public Usuario partialUpdate(Usuario usuario) {
         Usuario existingUsuario = usuarioRepository.findById(usuario.getUsuario_id()).orElse(null);
         if (existingUsuario != null) {
@@ -88,7 +83,7 @@ public class UsuarioService {
     }
 
     public Usuario findByCorreo(String correo) {
-        return usuarioRepository.findByCorreo(correo);
+        return usuarioRepository.findByCorreo(correo).orElse(null);
     }
 
 }
