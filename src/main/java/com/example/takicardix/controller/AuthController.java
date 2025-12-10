@@ -34,7 +34,6 @@ public class AuthController {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
-
     public AuthController(AuthenticationProvider authenticationProvider,
             UsuarioService usuarioService,
             UsuarioRepository usuarioRepository,
@@ -73,14 +72,20 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody Usuario usuario) {
-        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
-        usuarioService.save(usuario);
+    public ResponseEntity<?> register(@RequestBody Usuario usuario) {
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getCorreo());
+        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+        Usuario savedUsuario = usuarioService.save(usuario);
+
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(savedUsuario.getCorreo());
         String token = jwtService.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthResponse(token));
+        savedUsuario.setContrasena(null);
+
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "usuario", savedUsuario));
     }
 
     @GetMapping("/me")
