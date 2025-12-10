@@ -1,7 +1,9 @@
 package com.example.takicardix.controller;
 
+import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,6 +34,7 @@ public class AuthController {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
+
     public AuthController(AuthenticationProvider authenticationProvider,
             UsuarioService usuarioService,
             UsuarioRepository usuarioRepository,
@@ -47,14 +50,26 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        Authentication authentication = authenticationProvider.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getCorreo(), request.getPassword()));
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        try {
+            Authentication authentication = authenticationProvider.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getCorreo(), request.getPassword()));
 
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-        String token = jwtService.generateToken(user);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String token = jwtService.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthResponse(token));
+            Usuario usuario = usuarioService.findByCorreo(request.getCorreo());
+            if (usuario != null) {
+                usuario.setContrasena(null);
+            }
+
+            return ResponseEntity.ok(Map.of(
+                    "token", token,
+                    "usuario", usuario));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Credenciales inválidas"));
+        }
     }
 
     @PostMapping("/register")

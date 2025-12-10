@@ -41,6 +41,7 @@ public class SecurityConfig {
                                 "/api/metodosEnvios/**",
                                 "/api/metodosPago/**",
                                 "/api/regiones/**",
+                                "/api/comunas/**",
                                 "/api/ordenes/**",
                                 "/api/ordenes/detalle/**",
                                 "/api/contacto/**",
