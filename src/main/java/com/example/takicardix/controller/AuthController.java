@@ -2,7 +2,6 @@ package com.example.takicardix.controller;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,36 +20,43 @@ import com.example.takicardix.service.UsuarioService;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final UsuarioService usuarioService;
+    private final UsuarioRepository usuarioRepository;
+    private final UserDetailsService userDetailsService;
+    private final JwtService jwtService;
 
-    @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    private JwtService jwtService;
+    public AuthController(AuthenticationManager authenticationManager,
+            UsuarioService usuarioService,
+            UsuarioRepository usuarioRepository,
+            UserDetailsService userDetailsService,
+            JwtService jwtService) {
+        this.authenticationManager = authenticationManager;
+        this.usuarioService = usuarioService;
+        this.usuarioRepository = usuarioRepository;
+        this.userDetailsService = userDetailsService;
+        this.jwtService = jwtService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-        );
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+
+
         UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
         String token = jwtService.generateToken(user);
+
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody Usuario usuario) {
         usuarioService.save(usuario);
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getCorreo());
         String token = jwtService.generateToken(userDetails);
+
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
@@ -61,23 +67,20 @@ public class AuthController {
 
         Optional<Usuario> user = usuarioRepository.findByCorreo(email);
 
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
 
-// Clases auxiliares
-class LoginRequest {
 
-    private String username;
+class LoginRequest {
+    private String username; 
     private String password;
 
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -85,13 +88,13 @@ class LoginRequest {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 }
 
 class AuthResponse {
-
     private String token;
 
     public AuthResponse(String token) {
@@ -101,6 +104,7 @@ class AuthResponse {
     public String getToken() {
         return token;
     }
+
     public void setToken(String token) {
         this.token = token;
     }
