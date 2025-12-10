@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,17 +30,20 @@ public class AuthController {
     private final UsuarioRepository usuarioRepository;
     private final UserDetailsService userDetailsService;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthController(AuthenticationProvider authenticationProvider,
             UsuarioService usuarioService,
             UsuarioRepository usuarioRepository,
             UserDetailsService userDetailsService,
-            JwtService jwtService) {
+            JwtService jwtService,
+            PasswordEncoder passwordEncoder) {
         this.authenticationProvider = authenticationProvider;
         this.usuarioService = usuarioService;
         this.usuarioRepository = usuarioRepository;
         this.userDetailsService = userDetailsService;
         this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/login")
@@ -55,6 +59,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody Usuario usuario) {
+        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
         usuarioService.save(usuario);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getCorreo());
@@ -66,7 +71,7 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<Usuario> getMyProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); 
+        String email = authentication.getName();
 
         Optional<Usuario> user = usuarioRepository.findByCorreo(email);
 
@@ -74,7 +79,6 @@ public class AuthController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
-
 
 class LoginRequest {
     private String correo;
