@@ -3,7 +3,7 @@ package com.example.takicardix.controller;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,18 +24,18 @@ import com.example.takicardix.service.UsuarioService;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
+    private final AuthenticationProvider authenticationProvider;
     private final UsuarioService usuarioService;
     private final UsuarioRepository usuarioRepository;
     private final UserDetailsService userDetailsService;
     private final JwtService jwtService;
 
-    public AuthController(AuthenticationManager authenticationManager,
+    public AuthController(AuthenticationProvider authenticationProvider,
             UsuarioService usuarioService,
             UsuarioRepository usuarioRepository,
             UserDetailsService userDetailsService,
             JwtService jwtService) {
-        this.authenticationManager = authenticationManager;
+        this.authenticationProvider = authenticationProvider;
         this.usuarioService = usuarioService;
         this.usuarioRepository = usuarioRepository;
         this.userDetailsService = userDetailsService;
@@ -44,12 +44,10 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-
-        authenticationManager.authenticate(
+        Authentication authentication = authenticationProvider.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getCorreo(), request.getPassword()));
 
-
-        UserDetails user = userDetailsService.loadUserByUsername(request.getCorreo());
+        UserDetails user = (UserDetails) authentication.getPrincipal();
         String token = jwtService.generateToken(user);
 
         return ResponseEntity.ok(new AuthResponse(token));
@@ -70,13 +68,13 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName(); 
 
-
         Optional<Usuario> user = usuarioRepository.findByCorreo(email);
 
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
+
 
 class LoginRequest {
     private String correo;
