@@ -37,9 +37,17 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/api/usuarios/**",
                                 "/api/productos/**",
-                                "/api/marcas/**")
+                                "/api/marcas/**",
+                                "/api/metodosEnvios/**",
+                                "/api/metodosPago/**",
+                                "/api/regiones/**",
+                                "/api/ordenes/**",
+                                "/api/ordenes/detalle/**",
+                                "/api/contacto/**",
+                                "/api/envios/**",
+                                "/api/ventas/**",
+                                "/api/logistica/**")
                         .permitAll()
-                        .requestMatchers("/doc/**", "/swagger-ui/**", "/v3/api-docs/**", "/error").permitAll()
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
