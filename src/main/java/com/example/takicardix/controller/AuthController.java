@@ -60,6 +60,10 @@ public class AuthController {
             Usuario usuario = usuarioService.findByCorreo(request.getCorreo());
             if (usuario != null) {
                 usuario.setContrasena(null);
+
+                if (usuario.getRol() != null) {
+                    usuario.getRol().getNombre();
+                }
             }
 
             return ResponseEntity.ok(Map.of(
@@ -76,7 +80,6 @@ public class AuthController {
 
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
         Usuario savedUsuario = usuarioService.save(usuario);
-
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(savedUsuario.getCorreo());
         String token = jwtService.generateToken(userDetails);
