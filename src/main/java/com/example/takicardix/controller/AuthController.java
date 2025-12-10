@@ -38,11 +38,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        // Autenticamos usando el correo (request.getUsername() trae el correo del front)
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
-        // Cargamos usuario por correo
         UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
         String token = jwtService.generateToken(user);
         return ResponseEntity.ok(new AuthResponse(token));
@@ -51,7 +49,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody Usuario usuario) {
         usuarioService.save(usuario);
-        // Al registrar, usamos el correo para generar el token
         UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getCorreo());
         String token = jwtService.generateToken(userDetails);
         return ResponseEntity.ok(new AuthResponse(token));
@@ -60,7 +57,7 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<Usuario> getMyProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // El token contiene el correo
+        String email = authentication.getName(); 
 
         Optional<Usuario> user = usuarioRepository.findByCorreo(email);
 
