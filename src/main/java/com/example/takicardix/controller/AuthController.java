@@ -9,12 +9,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.takicardix.config.JwtService;
 import com.example.takicardix.model.Usuario;
 import com.example.takicardix.repository.UsuarioRepository;
 import com.example.takicardix.service.UsuarioService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -40,11 +45,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+                new UsernamePasswordAuthenticationToken(request.getCorreo(), request.getPassword()));
 
 
-        UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
+        UserDetails user = userDetailsService.loadUserByUsername(request.getCorreo());
         String token = jwtService.generateToken(user);
 
         return ResponseEntity.ok(new AuthResponse(token));
@@ -65,6 +71,7 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName(); 
 
+
         Optional<Usuario> user = usuarioRepository.findByCorreo(email);
 
         return user.map(ResponseEntity::ok)
@@ -72,17 +79,16 @@ public class AuthController {
     }
 }
 
-
 class LoginRequest {
-    private String username; 
+    private String correo;
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPassword() {
