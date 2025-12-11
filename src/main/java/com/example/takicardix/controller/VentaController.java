@@ -75,4 +75,13 @@ public class VentaController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<Venta>> getVentasByUsuario(@PathVariable Integer id) {
+        List<Venta> ventas = ventaService.findByUsuarioId(id);
+        if (ventas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ventas);
+    }
+
 }
