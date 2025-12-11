@@ -8,6 +8,7 @@ import com.example.takicardix.model.Venta;
 
 public interface VentaRepository extends JpaRepository<Venta, Integer> {
 
-    List<Venta> findByUsuarioUsuarioId(Integer usuario_id);
+    List<Venta> findByUsuarioUsuario_id(Integer usuario_id);
+
 
 }
